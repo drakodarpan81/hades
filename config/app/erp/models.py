@@ -1,71 +1,85 @@
 from django.db import models
 from datetime import datetime
+from app.erp.choices import gender_choices
 
 
-class Tipo(models.Model):
-    name = models.CharField(verbose_name="Nombre del tipo:", max_length=50)
+class Category(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+
+    def __str__(self):
+        return 'Nombre: {}'.format(self.name)
 
     class Meta:
-        verbose_name = "Tipo"
-        verbose_name_plural = "Tipos"
-        db_table = 'tipo'
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
         ordering = ['id']
 
+
+class Product(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+    cate = models.ForeignKey(Category, on_delete=models.CASCADE)
+    image = models.ImageField(
+        upload_to='product/%Y/%m/%d', null=True, blank=True)
+    pvp = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+
     def __str__(self):
         return self.name
-
-
-"""
-    def get_absolute_url(self):
-        return reverse("Type_detail", kwargs={"pk": self.pk})
-"""
-
-
-class Categoria(models.Model):
-    name = models.CharField(max_length=150)
 
     class Meta:
-        verbose_name = "Categoria"
-        verbose_name_plural = "Categorias"
-
-    def __str__(self):
-        return self.name
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
+        ordering = ['id']
 
 
-class Empleado(models.Model):
-
+class Client(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
-    dni = models.CharField(max_length=10, verbose_name='DNI', unique=True)
-    date_joined = models.DateField(
-        verbose_name="Fecha de registro", default=datetime.now)
-    date_created = models.DateTimeField(
-        verbose_name="Fecha de registro", default=datetime.now)
-    # auto_now => Solo cuando se registra la primera vez, tendra valor y no se movera
-    date_created = models.DateTimeField(auto_now=True)
-    # auto_now_add => Se va a estar modificando el valor, cada que se modifica el campo
-    date_created = models.DateTimeField(auto_now_add=True)
-    age = models.PositiveIntegerField(default=0, verbose_name="Edad")
-    salario = models.DecimalField(max_digits=9, decimal_places=2)
-    sate = models.BooleanField(default=True)
-    # sexo = models.CharField(max_length=50, verbose_name="Sexo")
-    avatar = models.ImageField(upload_to='avatar', null=True, blank=True)
-    cv = models.FileField(upload_to='cv', null=True, blank=True)
-
-    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE)
-
-    categoria = models.ManyToManyField(Categoria)
-
-    class Meta:
-        verbose_name = "Empleado"
-        verbose_name_plural = "Empleados"
-        db_table = 'empleado'
-        ordering = ['id']
+    surnames = models.CharField(max_length=150, verbose_name='Apellidos')
+    dni = models.CharField(max_length=10, unique=True, verbose_name='Dni')
+    birthday = models.DateField(
+        default=datetime.now, verbose_name='Fecha de nacimiento')
+    address = models.CharField(
+        max_length=150, null=True, blank=True, verbose_name='Dirección')
+    sexo = models.CharField(
+        max_length=10, choices=gender_choices, default='male', verbose_name='Sexo')
 
     def __str__(self):
         return self.names
 
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+        ordering = ['id']
 
-"""
-    def get_absolute_url(self):
-        return reverse("Empleado_detail", kwargs={"pk": self.pk})
-"""
+
+class Sale(models.Model):
+    cli = models.ForeignKey(Client, on_delete=models.CASCADE)
+    date_joined = models.DateField(default=datetime.now)
+    subtotal = models.DecimalField(
+        default=0.00, max_digits=9, decimal_places=2)
+    iva = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    total = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+
+    def __str__(self):
+        return self.cli.names
+
+    class Meta:
+        verbose_name = 'Venta'
+        verbose_name_plural = 'Ventas'
+        ordering = ['id']
+
+
+class DetSale(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    prod = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    cant = models.IntegerField(default=0)
+    subtotal = models.DecimalField(
+        default=0.00, max_digits=9, decimal_places=2)
+
+    def __str__(self):
+        return self.prod.name
+
+    class Meta:
+        verbose_name = 'Detalle de Venta'
+        verbose_name_plural = 'Detalle de Ventas'
+        ordering = ['id']
