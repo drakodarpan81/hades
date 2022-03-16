@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Category
+
 # Create your views here.
 
 
-def myfirstview(request):
-    return HttpResponse('Hola está es mi primera URL')
+def Home(request):
+    return render(request, 'home.html')
 
-
-def mysecondview(request):
-    return HttpResponse('Hola está es mi primera URL')
+def Index(request):
+    return render(request, 'index.html')

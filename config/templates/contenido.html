@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block contenido %}
+    <h1>
+        Bienvenido a esta página: {{ nombre }}
+    </h1>
+
+    <ul>
+        {% for c in categoria %}
+            <li>
+                {{c.id}} - {{c.name}}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if categoria %}
+        <p>Si tiene datos</p>
+    {% else %}
+        <p>No tiene datos</p>
+    {% endif %}
+
+    <a href=" {% url 'erp:primera' %} ">Primera</a>
+{% endblock %}

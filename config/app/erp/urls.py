@@ -1,8 +1,10 @@
 from django.urls import path
 
-from app.erp.views import myfirstview, mysecondview
+from app.erp.views import Home, Index
+
+app_name = 'erp'
 
 urlpatterns = [
-    path('primera/', myfirstview),
-    path('segunda/', mysecondview),
+    path('', Home, name='home'),
+    path('index/', Index, name='index'),
 ]
