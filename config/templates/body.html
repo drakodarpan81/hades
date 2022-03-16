@@ -2,63 +2,78 @@
 
 {% load static %}
 
-{% block body %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables/datatables.min.css' %}">
+        <link rel="stylesheet" href=" {% static 'lib/datatables/datatables/css/dataTables.bootstrap5.min.css' %} ">
+            <link rel="stylesheet" href=" {% static 'lib/datatables/responsive/css/responsive.bootstrap5.min.css' %} ">
 
-    <body class="hold-transition layout-top-nav">
-        <div class="wrapper">
+                <script src=" {% static 'lib/datatables/datatables.min.js' %}"></script>
+                <script src=" {% static 'lib/datatables/datatables/js/jquery.dataTables.js' %} "></script>
+                <script src=" {% static 'lib/datatables/datatables/js/dataTables.bootstrap5.min.js' %} "></script>
 
-            {% include 'header.html' %}
+                <script src=" {% static 'lib/datatables/responsive/js/dataTables.responsive.min.js' %} "></script>
+                <script src=" {% static 'lib/datatables/responsive/js/responsive.bootstrap5.min.js' %} "></script>
+            {% endblock head %}
 
-            <!-- Content Wrapper. Contains page content -->
-            <div
-                class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">
-                                Bienvenido
-                                <small>Example 3.0</small>
-                            </h1>
+            {% block body %}
+
+                <body class="hold-transition layout-top-nav">
+                    <div class="wrapper">
+
+                        {% include 'header.html' %}
+
+                        <!-- Content Wrapper. Contains page content -->
+                        <div
+                            class="content-wrapper">
+                            <!-- Content Header (Page header) -->
+                            <div class="content-header">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1 class="m-0 text-dark">
+                                            Bienvenido
+                                            <small>Example 3.0</small>
+                                        </h1>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ol class="breadcrumb float-sm-right">
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Home</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">Layout</a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                {% block content %}{% endblock content %}
+                            </div>
+                            <!-- /.content-header -->
+
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a href="#">Layout</a>
-                                </li>
-                            </ol>
-                        </div>
+                        <!-- /.content-wrapper -->
+
+                        <!-- Control Sidebar -->
+                        <aside
+                            class="control-sidebar control-sidebar-dark"><!-- Control sidebar content goes here -->
+                        </aside>
+                        <!-- /.control-sidebar -->
+
+                        {% include 'footer.html' %}
+
                     </div>
-                    {% block content %}{% endblock content %}
-                </div>
-                <!-- /.content-header -->
+                    <!-- ./wrapper -->
 
-            </div>
-            <!-- /.content-wrapper -->
+                    <!-- REQUIRED SCRIPTS -->
 
-            <!-- Control Sidebar -->
-            <aside
-                class="control-sidebar control-sidebar-dark"><!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+                    <!-- jQuery --><script src="{% static 'lib/adminlte-3.2.0/plugins/jquery/jquery.min.js' %}"> </script>
+                    <!-- Bootstrap 4 -->
+                    <script src="{% static 'lib/adminlte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+                    <!-- AdminLTE App -->
+                    <script src="{% static 'lib/adminlte-3.2.0/js/adminlte.min.js' %}"></script>
+                    <!-- AdminLTE for demo purposes -->
+                    <!-- <script src="{% static 'lib/adminlte-3.2.0/js/demo.js' %}"></script> -->
 
-            {% include 'footer.html' %}
+                    {% block js %}{% endblock js %}
+                </body>
 
-        </div>
-        <!-- ./wrapper -->
-
-        <!-- REQUIRED SCRIPTS -->
-
-        <!-- jQuery --><script src="{% static 'lib/adminlte-3.2.0/plugins/jquery/jquery.min.js' %}"> </script>
-        <!-- Bootstrap 4 -->
-        <script src="{% static 'lib/adminlte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
-        <!-- AdminLTE App -->
-        <script src="{% static 'lib/adminlte-3.2.0/js/adminlte.min.js' %}"></script>
-        <!-- AdminLTE for demo purposes -->
-        <!-- <script src="{% static 'lib/adminlte-3.2.0/js/demo.js' %}"></script> -->
-    </body>
-
-{% endblock body %}
+            {% endblock body %}
