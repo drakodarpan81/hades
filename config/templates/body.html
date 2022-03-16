@@ -1,0 +1,64 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+{% block body %}
+
+    <body class="hold-transition layout-top-nav">
+        <div class="wrapper">
+
+            {% include 'header.html' %}
+
+            <!-- Content Wrapper. Contains page content -->
+            <div
+                class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">
+                                Bienvenido
+                                <small>Example 3.0</small>
+                            </h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Layout</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    {% block content %}{% endblock content %}
+                </div>
+                <!-- /.content-header -->
+
+            </div>
+            <!-- /.content-wrapper -->
+
+            <!-- Control Sidebar -->
+            <aside
+                class="control-sidebar control-sidebar-dark"><!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+
+            {% include 'footer.html' %}
+
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- REQUIRED SCRIPTS -->
+
+        <!-- jQuery --><script src="{% static 'lib/adminlte-3.2.0/plugins/jquery/jquery.min.js' %}"> </script>
+        <!-- Bootstrap 4 -->
+        <script src="{% static 'lib/adminlte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+        <!-- AdminLTE App -->
+        <script src="{% static 'lib/adminlte-3.2.0/js/adminlte.min.js' %}"></script>
+        <!-- AdminLTE for demo purposes -->
+        <!-- <script src="{% static 'lib/adminlte-3.2.0/js/demo.js' %}"></script> -->
+    </body>
+
+{% endblock body %}
