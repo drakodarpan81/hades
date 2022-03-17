@@ -12,13 +12,32 @@
 
             <div class="card-body">
                 {% csrf_token %}
-                {{ form }}
-                </div>
-                <div class="card-footer text-muted">
-                    <button type="submit" class="btn btn-block btn-outline-success" id="btnTest">
-                        <i class="fa-regular fa-floppy-disk"></i>
-                        Guardar registro</button>
-                </div>
+
+                {% for field in form.visible_fields %}
+
+                    <div class="form-group">
+                        <label for="">
+                            {{ field.label }}:
+                        </label>
+                        {{ field }}
+                    </div>
+
+                {% endfor %}
+
+                <!-- Se muestra campo a campo
+                                <div class="form-group">
+                                    <label for="">
+                                        {{ form.name.label }}:
+                                    </label>
+                                    {{ form.name }}
+                                </div> -->
+
             </div>
-        </form>
-    {% endblock content %}
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-block btn-outline-success" id="btnTest">
+                    <i class="fa-regular fa-floppy-disk"></i>
+                    Guardar registro</button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
