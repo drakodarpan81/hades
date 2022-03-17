@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from app.erp.choices import gender_choices
+from django.forms import model_to_dict
 
 
 class Category(models.Model):
@@ -8,6 +9,12 @@ class Category(models.Model):
 
     def __str__(self):
         return 'Nombre: {}'.format(self.name)
+
+    def toJSON(self):
+        # item = {'id': self.id, 'name': self.name} # Asignar un grupo de datos
+        # Asigna todos los campos en formato de diccionario
+        item = model_to_dict(self)
+        return item
 
     class Meta:
         verbose_name = 'Categoria'
