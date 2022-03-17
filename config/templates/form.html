@@ -1,0 +1,49 @@
+{% extends "body.html" %}
+
+{% block content %}
+    <form action="." method="post">
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-plus"></i>
+                    {{ title }}
+                </h3>
+            </div>
+
+            <div class="card-body">
+                {% csrf_token %}
+
+                {% for field in form.visible_fields %}
+
+                    <div class="form-group">
+                        <label for="">
+                            {{ field.label }}:
+                        </label>
+                        {{ field }}
+                    </div>
+
+                {% endfor %}
+
+                <!-- Se muestra campo a campo
+                                                <div class="form-group">
+                                                    <label for="">
+                                                        {{ form.name.label }}:
+                                                    </label>
+                                                    {{ form.name }}
+                                                </div> -->
+
+            </div>
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-block btn-outline-success" id="btnTest">
+                    <i class="fa-regular fa-floppy-disk"></i>
+                    Guardar registro</button>
+            </div>
+        </div>
+
+        <script>
+            {% if form.errors %}
+                var errores = '';{% for field in form %}{% for error in field.errors %}errores = '{{ error }}\n'{% endfor %}
+                {% endfor %}Swal.fire({icon: 'error', title: 'Existen los siguiente errores:', text: errores});{% endif %}
+        </script>
+    </form>
+{% endblock content %}

@@ -22,9 +22,9 @@
             </table>
         </div>
         <div class="card-footer text-muted">
-            <button type="button" class="btn btn-block btn-outline-success" id="btnTest">
+            <a href=" {{ create_url }} " class="btn btn-block btn-outline-success" id="btnTest">
                 <i class="fa-regular fa-floppy-disk"></i>
-                Nuevo registro</button>
+                Nuevo registro</a>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
             responsive: true,
             autoWidth: false,
             "language": {
-                url: "         {% static 'lib/datatables/spanish.txt' %}"
+                url: "           {% static 'lib/datatables/spanish.txt' %}"
             }
         });
 
