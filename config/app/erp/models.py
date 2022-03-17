@@ -5,7 +5,8 @@ from django.forms import model_to_dict
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150, verbose_name='Nombre', unique=True)
+    name = models.CharField(
+        max_length=150, verbose_name='Nombre categoria', unique=True)
 
     def __str__(self):
         return 'Nombre: {}'.format(self.name)
