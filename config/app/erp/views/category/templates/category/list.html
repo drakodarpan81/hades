@@ -26,9 +26,9 @@
                 {{c.fec}}
             </td>
             <td>
-                <button type="button" class="btn btn-outline-info btn-block btn-sm">
+                <a href=" {% url 'erp:category_update' c.id %} " class="btn btn-outline-info btn-block btn-sm">
                     <i class="fa-solid fa-file-pen"></i>
-                    Editar</button>
+                    Editar</a >
                 <button type="button" class="btn btn-outline-danger btn-block btn-sm">
                     <i class="fa-solid fa-trash-can"></i>
                     Eliminar</button>
