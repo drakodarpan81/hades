@@ -1,7 +1,7 @@
 import imp
 from django.shortcuts import render, redirect
 from app.erp.models import Category
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -63,8 +63,10 @@ class CategoryCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Agregar categoria'
         context["entity"] = 'Categorias'
+        context["action"] = 'add'
         context["list_url"] = reverse_lazy('erp:category_list')
         return context
+
 
 class CategoryUpdateView(UpdateView):
     model = Category
@@ -76,7 +78,19 @@ class CategoryUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Actualizar categoria'
         context["entity"] = 'Categorias'
-        context["icon"] = '<i class="fa-solid fa-pen-to-square"></i>'
+        context["action"] = 'update'
         context["list_url"] = reverse_lazy('erp:category_list')
         return context
-        
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = "category/delete.html"
+    success_url = reverse_lazy('erp:category_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Eliminar categoria'
+        context["entity"] = 'Categorias'
+        context["list_url"] = reverse_lazy('erp:category_list')
+        return context

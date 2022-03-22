@@ -14,24 +14,24 @@
     {% for c in object_list %}
         <tr>
             <td>
-                {{c.id}}
+                {{ c.id }}
             </td>
             <td>
-                {{c.name}}
+                {{ c.name }}
             </td>
             <td>
-                {{c.id_nombre}}
+                {{ c.id_nombre }}
             </td>
             <td>
-                {{c.fec}}
+                {{ c.fec }}
             </td>
             <td>
                 <a href=" {% url 'erp:category_update' c.id %} " class="btn btn-outline-info btn-block btn-sm">
                     <i class="fa-solid fa-file-pen"></i>
-                    Editar</a >
-                <button type="button" class="btn btn-outline-danger btn-block btn-sm">
+                    Editar</a>
+                <a href=" {% url 'erp:category_delete' c.id %} " class="btn btn-outline-danger btn-block btn-sm">
                     <i class="fa-solid fa-trash-can"></i>
-                    Eliminar</button>
+                    Eliminar</a>
             </td>
         </tr>
     {% endfor %}
