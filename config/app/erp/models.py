@@ -10,7 +10,7 @@ class Nombre(models.Model):
 
     def __str__(self):
         return self.nombre
-        
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -33,7 +33,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
-        ordering = ['id']
+        ordering = ['-id']
 
 
 class Product(models.Model):

@@ -22,9 +22,11 @@ const btnsDelete = document.querySelectorAll("#btnDelete");
         });
     });
 
+    /*
     btnsDelete.forEach((btn) => {
         btn.addEventListener("click", function(e){
             e.preventDefault();
+            console.log(window.location.pathname);
             Swal.fire({
                 title: '¿Desea eliminar el registro?',
                 showCancelButton:true,
@@ -33,11 +35,13 @@ const btnsDelete = document.querySelectorAll("#btnDelete");
                 backdrop:true,
                 showLoaderOnConfirm:true,
                 preConfirm:()=>{
-                    location.href = e.target.href;
+                    //location.href = window.location.pathname;
                 },
                 allowOutsideClick: ()=>false,
                 allowEscapeKey:()=>false,
             });
         });
     });
+    */
+   
 })();
