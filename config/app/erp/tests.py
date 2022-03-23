@@ -1,16 +1,13 @@
 from django.test import TestCase
 from app.erp.models import *
+import random
 
-data = ['David 1', 'David 2']
-for i in data:
-    nom = Nombre(nombre=i)
-    nom.save()
-    print("Guardado registro N° {}".format(nom.id))
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+           'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-data = ['1 Leche y derivados', '2 Carnes, pescados y huevos', '3Patatas, legumbres, frutos secos',
-        '4 Verduras y Hortalizas', '5 Frutas', '6 Cereales y derivados, azúcar y dulces', '7 Grasas, aceite y mantequilla']
-
-for i in data:
-    cat = Category(name=i)
-    cat.save()
-    print("Guardado registro N° {}".format(cat.id))
+for i in range(1, 6000):
+    name = ''.join(random.choices(letters, k=5))
+    while Category.objects.filter(name=name).exists():
+        name = ''.join(random.choices(letters, k=5))
+    Category(name=name).save()
+    print('Guardado registro {}'.format(i))

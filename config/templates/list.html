@@ -38,14 +38,4 @@
 <script src="{% static 'lib/datatables/DataTables-1.11.5/js/dataTables.bootstrap5.min.js' %} "></script>
 <script src="{% static 'lib/datatables/responsive/js/responsive.bootstrap5.min.js' %} "></script>
 
-<script type="application/javascript">
-    $(function () {
-        $('#myDataTable').DataTable({
-            responsive: true,
-            autoWidth: false,
-            "language": {
-                url: "{% static 'lib/datatables/spanish.txt' %}"
-            }
-        });
-    });
-</script>{% endblock js %}
+{% block head_list %}{% endblock head_list %}{% endblock js %}

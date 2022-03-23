@@ -4,22 +4,11 @@ from app.erp.choices import gender_choices
 from django.forms import model_to_dict
 
 
-class Nombre(models.Model):
-    nombre = models.CharField(
-        max_length=150, verbose_name='Nombre categoria', unique=True)
-
-    def __str__(self):
-        return self.nombre
-
-
 class Category(models.Model):
     name = models.CharField(
         max_length=150, verbose_name='Nombre categoria', unique=True)
     des = models.CharField(
         max_length=150, verbose_name='Descripción de la categoria', blank=True, null=True)
-    fec = models.DateField(verbose_name="fecha",
-                           auto_now=False, auto_now_add=False, default=datetime.now)
-    id_nombre = models.ForeignKey(Nombre, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return 'Nombre: {}'.format(self.name)
@@ -33,7 +22,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
-        ordering = ['-id']
+        ordering = ['id']
 
 
 class Product(models.Model):

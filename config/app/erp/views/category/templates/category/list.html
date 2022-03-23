@@ -1,38 +1,15 @@
 {% extends "list.html" %}
+{% load static %}
+
+{% block head_list %}
+    <script src=" {% static 'category/js/list.js' %} "></script>
+{% endblock head_list %}
 
 {% block column %}
     <tr>
-        <th scope="col">No</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Nombre autor</th>
-        <th scope="col">Fecha creación</th>
-        <th scope="col">Opciones</th>
+        <th scope="col" style="width: 10%;">No</th>
+        <th scope="col" style="width: 20%;">Nombre</th>
+        <th scope="col" style="width: 50%;">Nombre autor</th>
+        <th scope="col" style="width: 20%;">Opciones</th>
     </tr>
 {% endblock column %}
-
-{% block rows %}
-    {% for c in object_list %}
-        <tr>
-            <td>
-                {{ c.id }}
-            </td>
-            <td>
-                {{ c.name }}
-            </td>
-            <td>
-                {{ c.id_nombre }}
-            </td>
-            <td>
-                {{ c.fec }}
-            </td>
-            <td>
-                <a href=" {% url 'erp:category_update' c.id %} " class="btn btn-outline-info btn-block btn-sm">
-                    <i class="fa-solid fa-file-pen"></i>
-                    Editar</a>
-                <a href=" {% url 'erp:category_delete' c.id %} " class="btn btn-outline-danger btn-block btn-sm">
-                    <i class="fa-solid fa-trash-can"></i>
-                    Eliminar</a>
-            </td>
-        </tr>
-    {% endfor %}
-{% endblock rows %}
