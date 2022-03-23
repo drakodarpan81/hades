@@ -45,6 +45,7 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     'app.erp',
+    'app.homepage',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -67,6 +68,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates',
             'app/erp/views/category/templates',
+            'app/homepage/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

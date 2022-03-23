@@ -11,15 +11,6 @@ from django.urls import reverse_lazy
 from app.erp.views.category.forms import CategoryForm
 
 
-def category_list(request):
-    data = {
-        'title': 'Listado de categorias',
-        'icon': '<i class="fa-solid fa-list-check"></i>',
-        'categorias': Category.objects.all()
-    }
-    return render(request, 'category/list.html', data)
-
-
 class CategoryListView(ListView):
     model = Category
     template_name = 'category/list.html'
@@ -51,13 +42,6 @@ class CategoryListView(ListView):
         context["list_url"] = reverse_lazy('erp:category_list')
         context["entity"] = 'Categorias'
         return context
-
-
-"""
-# Muestra la información filtrada por la letra B
-    def get_queryset(self):
-        return Category.objects.filter(name__startswith='B')
-"""
 
 
 class CategoryCreateView(CreateView):
