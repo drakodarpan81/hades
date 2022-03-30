@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth import login
+import config.settings as setting
 
 
 class loginFormView(LoginView):
@@ -12,7 +13,7 @@ class loginFormView(LoginView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('erp:category_list')
+            return redirect(setting.LOGIN_REDIRECT_URL)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -24,7 +25,7 @@ class loginFormView(LoginView):
 class loginFormView2(FormView):
     form_class = AuthenticationForm
     template_name = 'login.html'
-    success_url = reverse_lazy('erp:category_list')
+    success_url = reverse_lazy(setting.LOGIN_REDIRECT_URL)
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:

@@ -15,6 +15,7 @@ class CategoryListView(ListView):
     template_name = 'category/list.html'
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 

@@ -33,13 +33,13 @@
 
             </div>
             <div class="card-footer text-muted">
-                <button type="submit" class="btn btn-block btn-outline-success">
+                <button type="submit" class="btn btn-block btn-outline-success" id="guardar">
                     <i class="fa-solid fa-floppy-disk"></i>
                     Guardar registro</button>
 
                 <!-- <a href=" {% url 'erp:category_add' %} " class="btn btn-block btn-outline-success">
-                                                                                        <i class="fa-solid fa-floppy-disk"></i>
-                                                                                        Guardar registro</a> -->
+                                                                                                                                                                        <i class="fa-solid fa-floppy-disk"></i>
+                                                                                                                                                                        Guardar registro</a> -->
             </div>
         </div>
     </form>
@@ -47,10 +47,16 @@
 
     <script>
         {% if form.errors %}
-            var errores = '';{% for field in form %}
-                {% for error in field.errors %}errores = '{{ error }}\n'{% endfor %}
-            {% endfor %}
+            var errores = '';{% for field in form %}{% for error in field.errors %}errores = '{{ error }}\n'{% endfor %}{% endfor %}
 
             Swal.fire({icon: 'error', title: 'Existen los siguiente errores:', text: errores});{% endif %}
+
+        $('#guardar').on('submit', function (e) {
+            e.preventDefault();
+            var parameters = $(this).serializeArray()
+            submit_jqueryconfirm(window.location.pathname, parameters, function () {
+                location.href = '{{ list_url }}';
+            });
+        });
     </script>
 {% endblock content %}
