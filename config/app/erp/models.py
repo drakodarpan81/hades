@@ -2,6 +2,10 @@ from django.db import models
 from datetime import datetime
 from app.erp.choices import gender_choices
 from django.forms import model_to_dict
+from simple_history.models import HistoricalRecords
+
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
@@ -9,6 +13,7 @@ class Category(models.Model):
         max_length=150, verbose_name='Nombre categoria', unique=True)
     des = models.CharField(
         max_length=150, verbose_name='Descripción de la categoria', blank=True, null=True)
+    history = HistoricalRecords()
 
     def __str__(self):
         return 'Nombre: {}'.format(self.name)
@@ -22,7 +27,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
-        ordering = ['id']
+        ordering = ['-id']
 
 
 class Product(models.Model):

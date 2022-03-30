@@ -1,7 +1,6 @@
-import imp
 from django.shortcuts import render, redirect
 from app.erp.models import Category
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -84,4 +83,18 @@ class CategoryDeleteView(DeleteView):
         context["title"] = 'Eliminar categoria'
         context["entity"] = 'Categorias'
         context["list_url"] = reverse_lazy('erp:category_list')
+        return context
+
+
+class CategoryFormView(FormView):
+    form_class = CategoryForm
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('erp:category_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Form | categorias'
+        context["create_url"] = reverse_lazy('erp:category_add')
+        context["list_url"] = reverse_lazy('erp:category_list')
+        context["entity"] = 'Categorias'
         return context

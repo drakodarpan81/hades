@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from telnetlib import LOGOUT
 import config.db as db
 import environ
 
@@ -43,12 +44,18 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
+THIRD_APP = [
+    'simple_history',
+    'widget_tweaks',
+]
+
 PROJECT_APPS = [
     'app.erp',
     'app.homepage',
+    'app.login',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APP
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -69,6 +77,7 @@ TEMPLATES = [
             BASE_DIR / 'templates',
             'app/erp/views/category/templates',
             'app/homepage/templates',
+            'app/login/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -115,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-mx'
 
-TIME_ZONE = 'America/mazatlan'
+TIME_ZONE = 'America/Mazatlan'
 
 USE_I18N = True
 
@@ -135,3 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_REDIRECT_URL = '/erp/category/list'
+
+LOGOUT_REDIRECT_URL = '/login/'

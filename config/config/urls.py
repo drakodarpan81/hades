@@ -18,7 +18,8 @@ from django.urls import path, include
 from app.homepage.views import IndexView
 
 urlpatterns = [
-    path('', IndexView.as_view()),
+    path('', IndexView.as_view(), name='index'),
+    path('login/', include('app.login.urls')),
     path('admin/', admin.site.urls),
     path('erp/', include('app.erp.urls')),
 ]

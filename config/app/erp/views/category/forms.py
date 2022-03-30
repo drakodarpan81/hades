@@ -33,3 +33,20 @@ class CategoryForm(ModelForm):
                 }
             )
         }
+
+    def save(self, commit=True):
+        form = super().save(commit=False)
+
+        if commit:
+            form.save()
+
+        return form
+
+    def clean(self):
+        cleaned = super().clean()
+
+        if len(cleaned['name']) <= 10:
+            self.add_error(
+                'name', 'El campo [ NAME ], tienen que ser más de 10 caracteres.')
+
+        return cleaned
